@@ -147,7 +147,7 @@ def train(config):
                     genfun,
                     steps_per_epoch = display_interval,
                     epochs = 1,
-                    shuffle=False,
+                    # shuffle=False,
                     verbose = 0
                 ) #callbacks=[eval_map])
             print('Iter:%d\tloss=%.6f' % (i_e, history.history['loss'][0]), end='\n')

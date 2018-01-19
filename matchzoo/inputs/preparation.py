@@ -45,8 +45,8 @@ class Preparation(object):
         rels = []
         f = codecs.open(file_path, 'r', encoding='utf8')
         for line in f:
-            line = line
-            line = line.strip()
+            # line = line
+            # line = line.strip()
             label, t1, t2 = self.parse_line(line)
             id1 = self.get_text_id(hashid, t1, 'T')
             id2 = self.get_text_id(hashid, t2, 'T')
@@ -64,8 +64,8 @@ class Preparation(object):
         rels = []
         f = codecs.open(file_path, 'r', encoding='utf8')
         for line in f:
-            line = line
-            line = line.strip()
+            # line = line
+            # line = line.strip()
             label, t1, t2 = self.parse_line(line)
             id1 = self.get_text_id(hashid_q, t1, 'Q')
             id2 = self.get_text_id(hashid_d, t2, 'D')
@@ -106,8 +106,8 @@ class Preparation(object):
                 rels = rels_test
             f = codecs.open(file_path, 'r', encoding='utf8')
             for line in f:
-                line = line
-                line = line.strip()
+                # line = line
+                # line = line.strip()
                 label, t1, t2 = self.parse_line(line)
                 id2 = self.get_text_id(hashid, t2, 'D')
                 # generate unique query ids

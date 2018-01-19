@@ -211,8 +211,11 @@ class Triletter_PairGenerator(PairBasicGenerator):
                 indices.append(val)
                 data.append(1)
             indptr.append(indptr[-1] + len(feat))
+        # print("len(data):{}".format(len(data)))
+        # print("indptr: {}".format(indptr))
+        # print("len(data): {}, indices: {}, len(dense_feat): {}, self.vocab_size: {}".format(len(data), indices, len(dense_feat), self.vocab_size))
         res = sp.csr_matrix((data, indices, indptr), shape=(len(dense_feat), self.vocab_size), dtype="float32")
-        return sp.csr_matrix((data, indices, indptr), shape=(len(dense_feat), self.vocab_size), dtype="float32")
+        return res
 
     def transfer_feat2fixed(self, feats, max_len, fill_val):
         num_feat = len(feats)
@@ -242,6 +245,10 @@ class Triletter_PairGenerator(PairBasicGenerator):
             X2.append(self.map_word_to_triletter(self.data2[d2p]))
             X2.append(self.map_word_to_triletter(self.data2[d2n]))
         if self.dtype == 'dssm':
+            # print("len(X1): {}".format(len(X1)))
+            # print("len(X1[0]): {}".format(len(X1[0])))
+            # print("X1_len: {}".format(X1_len))
+            # print("transfer_feat2sparse(X1): {}".format(self.transfer_feat2sparse(X1).toarray()))
             return self.transfer_feat2sparse(X1).toarray(), X1_len, self.transfer_feat2sparse(X2).toarray(), X2_len, Y
         elif self.dtype == 'cdssm':
             return self.transfer_feat2fixed(X1, self.data1_maxlen, self.fill_word), X1_len,  \
