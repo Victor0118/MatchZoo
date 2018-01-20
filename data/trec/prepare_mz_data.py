@@ -43,7 +43,7 @@ if __name__ == '__main__':
     srcdir = './'
     dstdir = './'
 
-    testset = "train_2011"
+    testset = "test_2011"
     infiles = [ srcdir + 'train_{}.txt'.format(testset), srcdir + 'dev_{}.txt'.format(testset), srcdir + 'test_{}.txt'.format(testset)]
     corpus, rel_train, rel_valid, rel_test = prepare.run_with_train_valid_test_corpus(infiles[0], infiles[1], infiles[2])
     print('total corpus : %d ...' % (len(corpus)))
