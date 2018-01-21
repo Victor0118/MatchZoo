@@ -260,6 +260,8 @@ def predict(config):
         num_valid = 0
         res_scores = {}
         for input_data, y_true in genfun:
+            print("y_true: {}".format(y_true))
+
             y_pred = model.predict(input_data, batch_size=len(y_true) )
 
             if issubclass(type(generator), inputs.list_generator.ListBasicGenerator):
@@ -296,7 +298,7 @@ def predict(config):
                     for qid, dinfo in res_scores.items():
                         dinfo = sorted(dinfo.items(), key=lambda d:d[1][0], reverse=True)
                         for inum,(did, (score, gt)) in enumerate(dinfo):
-                            f.write('%s\tQ0\t%s\t%d\t%f\t%s\t%s\n'%(qid, did, inum, score, config['net_name'], gt))
+                            f.write('%s Q0 %s %d %f %s %s\n'%(qid, did, inum, score, config['net_name'], gt))
             elif output_conf[tag]['save_format'] == 'TEXTNET':
                 with open(output_conf[tag]['save_path'], 'w') as f:
                     for qid, dinfo in res_scores.items():

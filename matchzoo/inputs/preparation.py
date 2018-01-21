@@ -19,17 +19,22 @@ class Preparation(object):
     '''
 
     def __init__(self):
-        pass
+        self.counter = 0
 
-    def get_text_id(self, hashid, text, idtag='T'):
+    def get_text_id(self, hashid, text, idtag='T', duplicatedID = False):
         hash_obj = hashlib.sha1(text.encode('utf8'))  # if the text are the same, then the hash_code are also the same
         hex_dig = hash_obj.hexdigest()
-        if hex_dig in hashid:
-            return hashid[hex_dig]
+        if duplicatedID:
+            if hex_dig in hashid:
+                return hashid[hex_dig]
+            else:
+                tid = idtag + str(len(hashid))  # start from 0, 1, 2, ...
+                hashid[hex_dig] = tid
+                return tid
         else:
-            tid = idtag + str(len(hashid))  # start from 0, 1, 2, ...
-            hashid[hex_dig] = tid
-            return tid
+            tid = self.counter
+            self.counter += 1
+            return self.counter
 
     def parse_line(self, line, delimiter='\t'):
         subs = line.split(delimiter)
