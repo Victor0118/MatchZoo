@@ -39,10 +39,10 @@ class Preparation(object):
     def parse_line(self, line, delimiter='\t'):
         subs = line.split(delimiter)
         # print('subs: ', len(subs))
-        if 3 != len(subs):
-            raise ValueError('format of data file wrong, should be \'label,text1,text2\'.')
+        if 3 != len(subs) and 5 != len(subs):
+            raise ValueError('format of data file wrong, should be \'label,text1,text2\' or \'label,text1,text2,qid,docid\'.')
         else:
-            return subs[0], subs[1], subs[2]
+            return subs
 
     def run_with_one_corpus(self, file_path):
         hashid = {}
@@ -113,17 +113,25 @@ class Preparation(object):
             for line in f:
                 # line = line
                 # line = line.strip()
-                label, t1, t2 = self.parse_line(line)
-                id2 = self.get_text_id(hashid, t2, 'D')
-                # generate unique query ids
-                if t1 == curQ:
-                    # same query
-                    id1 = 'Q' + str(curQid)
+                ls = self.parse_line(line)
+                if len(ls) == 3:
+                    label, t1, t2 = ls
+                    id2 = self.get_text_id(hashid, t2, 'D')
+                    # generate unique query ids
+                    if t1 == curQ:
+                        # same query
+                        id1 = 'Q' + str(curQid)
+                    else:
+                        # new query
+                        curQid += 1
+                        id1 = 'Q' + str(curQid)
+                        curQ = t1
+                elif len(ls) == 5:
+                    label, t1, t2, id1, id2 = ls
+                    id2 = id2[:-1] if id2[-1] == "\n" else id2
                 else:
-                    # new query
-                    curQid += 1
-                    id1 = 'Q' + str(curQid)
-                    curQ = t1
+                    print("unrecognised file: {}".format(file_path))
+                    exit()
                 corpus[id1] = t1
                 corpus[id2] = t2
                 rels.append((label, id1, id2))
