@@ -9,6 +9,7 @@ sys.path.append('../../matchzoo/utils/')
 
 from preparation import Preparation
 from preprocess import Preprocess, NgramUtil
+import argparse
 
 
 def read_dict(infile):
@@ -39,13 +40,20 @@ def filter_triletter(tri_stats, min_filter_num=5, max_filter_num=10000):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('--testset', action='store', default="test_2011",
+                       help='testset (default: test_2011)')
+
+    args = parser.parse_args()
+    testset = args.testset
+
     prepare = Preparation()
     srcdir = './'
     dstdir = './'
 
-    testset = "test_2011"
     infiles = [ srcdir + 'train_{}.txt'.format(testset), srcdir + 'dev_{}.txt'.format(testset), srcdir + 'test_{}.txt'.format(testset)]
     corpus, rel_train, rel_valid, rel_test = prepare.run_with_train_valid_test_corpus(infiles[0], infiles[1], infiles[2])
+    print('testset : %s ...' % (testset))
     print('total corpus : %d ...' % (len(corpus)))
     print('total relation-train : %d ...' % (len(rel_train)))
     print('total relation-valid : %d ...' % (len(rel_valid)))
