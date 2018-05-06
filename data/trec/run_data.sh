@@ -16,7 +16,7 @@
 # # transfer the dataset into matchzoo dataset format
 # python transfer_to_mz_format.py
 # # generate the mz-datasets
-python prepare_mz_data.py --testset $1
+python prepare_mz_data.py --testyear $1
 
 # generate word embedding
 # python gen_w2v.py glove.840B.300d.txt word_dict.txt embed_glove_d300
@@ -28,7 +28,7 @@ python prepare_mz_data.py --testset $1
 # generate data bin sums for anmm model
 # generate idf file
 # cat word_stats.txt | cut -d ' ' -f 1,4 > embed.idf
-python gen_hist4drmm.py 60
-python gen_binsum4anmm.py 20 # the default number of bin is 20
+# python gen_hist4drmm.py 60
+# python gen_binsum4anmm.py 20 # the default number of bin is 20
 
 echo "Done ..."
