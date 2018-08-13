@@ -2,8 +2,9 @@
 <img src="./docs/_static/images/matchzoo-logo.png" width = "400"  alt="图片名称" align=center />
 </div>
 
+[![Build Status](https://travis-ci.org/faneshion/MatchZoo.svg?branch=master)](https://travis-ci.org/faneshion/MatchZoo/)
 ---
-MatchZoo is a toolkit for text matching. It was developed with a focus on facilitating the designing, comparing and sharing of deep text matching models. There are a number of deep matching methods, such as DRMM, MatchPyramid, MV-LSTM, aNMM, DUET, ARC-I, ARC-II, DSSM, and CDSSM, designed with a unified interface. Potential tasks related to MatchZoo include document retrieval, question answering, conversational response ranking, paraphrase identification, etc. We are always happy to receive any code contributions, suggestions, comments from all our MatchZoo users.
+MatchZoo is a toolkit for text matching. It was developed with a focus on facilitating the designing, comparing and sharing of deep text matching models. There are a number of deep matching methods, such as DRMM, MatchPyramid, MV-LSTM, aNMM, DUET, ARC-I, ARC-II, DSSM, and CDSSM, designed with a unified interface (collection of papers: [awesome-neural-models-for-semantic-match](https://github.com/NTSC-Community/awaresome-neural-models-for-semantic-match)). Potential tasks related to MatchZoo include document retrieval, question answering, conversational response ranking, paraphrase identification, etc. We are always happy to receive any code contributions, suggestions, comments from all our MatchZoo users.
 
 <table>
   <tr>
@@ -63,7 +64,8 @@ python matchzoo/main.py --phase predict --model_file examples/toy_example/config
 The architecture of the MatchZoo toolkit is described in the Figure  in what follows,
 <div align='center'>
 <img src="./docs/_static/images/matchzoo.png" width = "400" height = "200" alt="图片名称" align=center />
-</div>
+</div>  
+
 There are three major modules in the toolkit, namely data preparation, model construction, training and evaluation, respectively. These three modules are actually organized as a pipeline of data flow.
 
 ### Data Preparation
@@ -72,7 +74,7 @@ The data preparation module aims to convert dataset of different text matching t
 +	**Word Dictionary**: records the mapping from each word to a unique identifier called *wid*. Words that are too frequent (e.g. stopwords), too rare or noisy (e.g. fax numbers) can be  filtered out by predefined rules.
 +	**Corpus File**: records the mapping from each text to a unique identifier called *tid*, along with a sequence of word identifiers contained in that text. Note here each text is truncated or padded to a fixed length customized by users.
 +	**Relation File**: is used to store the relationship between two texts, each line containing a pair of *tids* and the corresponding label.
-+   **Detailed Input Data Format**: a detailed explaination of input data format can be found in MatchZoo/data/example/readme.md.
++   **Detailed Input Data Format**: a detailed explaination of input data format can be found in [MatchZoo/data/toy_example/readme.md](https://github.com/faneshion/MatchZoo/blob/master/data/toy_example/readme.md).
 
 ### Model Construction
 In the model construction module, we employ Keras library to help users build the deep matching model layer by layer conveniently. The Keras libarary provides a set of common layers widely used in neural models, such as convolutional layer, pooling layer, dense layer and so on. To further facilitate the construction of deep text matching models, we extend the Keras library to provide some layer interfaces specifically designed for text matching.
@@ -185,7 +187,7 @@ The MAP of each models in test dataset are depicted in the following figure,
 Here, the DRMM_TKS is a variant of DRMM for short text matching. Specifically, the matching histogram is replaced by a top-k maxpooling layer and the remaining part are fixed. 
 
 ### QuoraQP for Classification
-QuoraQP (Quora Question Pairs) is a text matching competition from kaggle, which is to predict whether the provided pairs of question contain have the same meaning. We have provided <a href="./data/QuoraQp/run_data.sh">a script</a> to download the dataset, and prepared it into the MatchZoo data format. In the <a href="./examples/QuoraQP/config">models directory</a>, there are a number of configurations about each model for QuoraQP dataset. 
+QuoraQP (Quora Question Pairs) is a text matching competition from kaggle, which is to predict whether the provided pair of questions have the same meaning. We have provided <a href="./data/QuoraQp/run_data.sh">a script</a> to download the dataset, and prepared it into the MatchZoo data format. In the <a href="./examples/QuoraQP/config">models directory</a>, there are a number of configurations about each model for QuoraQP dataset. 
 
 Take the MatchPyramid as an example. In training phase, you can run
 ```
@@ -343,7 +345,7 @@ Development Teams
 
 Acknowledgements
 =====
-We would like to express our appreciation to the following people for contributing source code to MatchZoo, including [Yixing Fan](https://scholar.google.com/citations?user=w5kGcUsAAAAJ&hl=en), [Liang Pang](https://scholar.google.com/citations?user=1dgQHBkAAAAJ&hl=zh-CN), [Liu Yang](https://sites.google.com/site/lyangwww/), [Yukun Zheng](), [Lijuan Chen](), [Jianpeng Hou](https://github.com/HouJP), [Zhou Yang](https://github.com/zhouzhouyang520), [Niuguo cheng](https://github.com/niuox) etc..
+We would like to express our appreciation to the following people for contributing source code to MatchZoo, including [Yixing Fan](https://scholar.google.com/citations?user=w5kGcUsAAAAJ&hl=en), [Liang Pang](https://scholar.google.com/citations?user=1dgQHBkAAAAJ&hl=zh-CN), [Liu Yang](https://sites.google.com/site/lyangwww/), [Wang Bo](www.wangbo.info), [Yukun Zheng](), [Lijuan Chen](), [Jianpeng Hou](https://github.com/HouJP), [Zhou Yang](https://github.com/zhouzhouyang520), [Niuguo cheng](https://github.com/niuox) etc..
 
 Feedback and Join Us
 =====

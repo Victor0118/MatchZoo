@@ -6,6 +6,7 @@
 *.trec
 *.ranklist
 *.DS_Store
+*.coverage
 predict.*
 build/
 dist/
@@ -14,3 +15,5 @@ matchzoo/log/*
 matchzoo/querydecision/
 log/*
 .idea/
+.pytest_cache/
+MatchZoo.egg-info/
