@@ -140,6 +140,10 @@ def train(config):
             eval_metrics[mobj] = metrics.get(mobj)
     model.compile(optimizer=optimizer, loss=loss)
     print('[Model] Model Compile Done.', end='\n')
+    print('{} parameters in total'.format(model.count_params()))
+    trainable_count = int(numpy.sum([K.count_params(p) for p in set(model.trainable_weights)]))
+    non_trainable_count = int(numpy.sum([K.count_params(p) for p in set(model.non_trainable_weights)]))
+    print('trainable_count: {} non_trainable_count: {}'.format(trainable_count, non_trainable_count))
 
     for i_e in range(num_iters):
         for tag, generator in train_gen.items():
@@ -155,12 +159,14 @@ def train(config):
             print('Iter:%d\tloss=%.6f' % (i_e, history.history['loss'][0]), end='\n')
 
         for tag, generator in eval_gen.items():
+            if tag == "test":
+                continue
             genfun = generator.get_batch_generator()
             print('[%s]\t[Eval:%s] ' % (time.strftime('%m-%d-%Y %H:%M:%S', time.localtime(time.time())), tag), end='')
             res = dict([[k,0.] for k in eval_metrics.keys()])
-            num_valid = 0
+            num_valid = 1e-8
             for input_data, y_true in genfun:
-                y_pred = model.predict(input_data, batch_size=len(y_true))
+                y_pred = model.predict(input_data, batch_size=128) # len(y_true)
                 if issubclass(type(generator), inputs.list_generator.ListBasicGenerator):
                     list_counts = input_data['list_counts']
                     for k, eval_func in eval_metrics.items():
@@ -178,6 +184,7 @@ def train(config):
             sys.stdout.flush()
         if (i_e+1) % save_weights_iters == 0:
             model.save_weights(weights_file % (i_e+1))
+
 
 def predict(config):
     ######## Read input config ########
