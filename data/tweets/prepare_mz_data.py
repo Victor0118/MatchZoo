@@ -49,7 +49,13 @@ if __name__ == '__main__':
     dstdir = './'
     
     year = sys.argv[1]
-    infiles = [ srcdir + 'train_{}.txt'.format(year), srcdir + 'dev_{}.txt'.format(year), srcdir + '{}.txt'.format(year)]
+    train = sys.argv[2]
+
+    if train == "0":
+        infiles = [ srcdir + '{}.txt'.format(year), srcdir + '{}.txt'.format(year), srcdir + '{}.txt'.format(year)]
+    else:
+        infiles = [ srcdir + 'train_{}.txt'.format(year), srcdir + 'dev_{}.txt'.format(year), srcdir + '{}.txt'.format(year)]
+
     corpus, rel_train, rel_valid, rel_test = prepare.run_with_train_valid_test_corpus(infiles[0], infiles[1], infiles[2])
     print('total corpus : %d ...' % (len(corpus)))
     print('total relation-train : %d ...' % (len(rel_train)))
