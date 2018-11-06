@@ -11,8 +11,8 @@ python norm_embed.py embed_glove_d300 embed_glove_d300_norm
 # generate data histograms for drmm model
 # generate data bin sums for anmm model
 # generate idf file
-# cat word_stats.txt | cut -d ' ' -f 1,4 > embed.idf
-python gen_hist4drmm.py 60
+cat word_stats.txt | cut -d ' ' -f 1,4 > embed.idf
+# python gen_hist4drmm.py 60
 # python gen_binsum4anmm.py 20 # the default number of bin is 20
 
 echo "Done ..."

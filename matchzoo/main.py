@@ -157,10 +157,16 @@ def train(config):
                     verbose = 0
                 ) #callbacks=[eval_map])
             print('Iter:%d\tloss=%.6f' % (i_e, history.history['loss'][0]), end='\n')
+        
+        if (i_e+1) % save_weights_iters == 0:
+            model.save_weights(weights_file % (i_e+1))
+        
+        if i_e % 20 != 0:
+            continue 
 
         for tag, generator in eval_gen.items():
-            if tag == "test":
-                continue
+            #if tag == "test":
+            #    continue
             genfun = generator.get_batch_generator()
             print('[%s]\t[Eval:%s] ' % (time.strftime('%m-%d-%Y %H:%M:%S', time.localtime(time.time())), tag), end='')
             res = dict([[k,0.] for k in eval_metrics.keys()])
@@ -182,9 +188,6 @@ def train(config):
             generator.reset()
             print('Iter:%d\t%s' % (i_e, '\t'.join(['%s=%f'%(k,v/num_valid) for k, v in res.items()])), end='\n')
             sys.stdout.flush()
-        if (i_e+1) % save_weights_iters == 0:
-            model.save_weights(weights_file % (i_e+1))
-
 
 def predict(config):
     ######## Read input config ########
