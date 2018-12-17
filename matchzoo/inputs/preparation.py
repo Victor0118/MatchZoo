@@ -36,6 +36,16 @@ class Preparation(object):
             self.counter += 1
             return self.counter
 
+    def get_text_id(self, hashid, text, idtag='T'):
+        hash_obj = hashlib.sha1(text.encode('utf8'))  # if the text are the same, then the hash_code are also the same
+        hex_dig = hash_obj.hexdigest()
+        if hex_dig in hashid:
+            return hashid[hex_dig]
+        else:
+            tid = idtag + str(len(hashid))  # start from 0, 1, 2, ...
+            hashid[hex_dig] = tid
+            return tid
+
     def parse_line(self, line, delimiter='\t'):
         subs = line.split(delimiter)
         # print('subs: ', len(subs))
@@ -81,7 +91,6 @@ class Preparation(object):
         rels = []
         f = codecs.open(file_path, 'r', encoding='utf8')
         for line in f:
-            # line = line
             # line = line.strip()
             label, t1, t2 = self.parse_line(line)
             id1 = self.get_text_id(hashid, t1, 'T')
@@ -100,7 +109,6 @@ class Preparation(object):
         rels = []
         f = codecs.open(file_path, 'r', encoding='utf8')
         for line in f:
-            # line = line
             # line = line.strip()
             label, t1, t2 = self.parse_line(line)
             id1 = self.get_text_id(hashid_q, t1, 'Q')
@@ -142,7 +150,6 @@ class Preparation(object):
                 rels = rels_test
             f = codecs.open(file_path, 'r', encoding='utf8')
             for line in f:
-                # line = line
                 # line = line.strip()
                 ls = self.parse_line(line)
                 if len(ls) == 3:
