@@ -6,9 +6,9 @@
       "save_weights_iters": 100,
       "num_iters": 5001,
       "display_interval": 20,
-"test_weights_iters": 5000, 
-      "optimizer": "sgd",
-      "learning_rate": 0.03
+"test_weights_iters": 1300, 
+      "optimizer": "adam",
+      "learning_rate": 0.001
   },
   "inputs": {
     "share": {
@@ -17,10 +17,10 @@
         "use_dpool": false,
         "embed_size": 300,
         "embed_path": "./data/robust04/embed.idf",
-        "vocab_size": 273640,
+        "vocab_size": 354582,
         "train_embed": false,
         "target_mode": "ranking",
-        "hist_size": 30,
+        "hist_size": 100,
         "text1_maxlen": 6,
         "text2_maxlen": 500
     },
@@ -32,28 +32,28 @@
         "batch_per_iter": 10,
         "batch_size": 128,
         "relation_file": "./data/robust04/relation_train.txt",
-        "hist_feats_file": "./data/robust04/relation_train.hist-30.txt"
+        "hist_feats_file": "./data/robust04/relation_train.hist-100.txt"
     },
     "valid": {
         "input_type": "DRMM_ListGenerator", 
         "phase": "EVAL",
         "batch_list": 10,
         "relation_file": "./data/robust04/relation_valid.txt",
-        "hist_feats_file": "./data/robust04/relation_valid.hist-30.txt"
+        "hist_feats_file": "./data/robust04/relation_valid.hist-100.txt"
     },
     "test": {
         "input_type": "DRMM_ListGenerator", 
         "phase": "EVAL",
         "batch_list": 10,
         "relation_file": "./data/robust04/relation_test.txt",
-        "hist_feats_file": "./data/robust04/relation_test.hist-30.txt"
+        "hist_feats_file": "./data/robust04/relation_test.hist-100.txt"
     },
     "predict": {
         "input_type": "DRMM_ListGenerator", 
         "phase": "PREDICT",
         "batch_list": 10,
         "relation_file": "./data/robust04/relation_test.txt",
-        "hist_feats_file": "./data/robust04/relation_test.hist-30.txt"
+        "hist_feats_file": "./data/robust04/relation_test.hist-100.txt"
     }
   },
   "outputs": {
@@ -66,9 +66,9 @@
     "model_path": "./matchzoo/models/",
     "model_py": "drmm.DRMM",
     "setting": {
-        "num_layers": 2,
-        "hidden_sizes": [5, 1],
-	    "dropout_rate": 0.1
+        "num_layers": 3,
+        "hidden_sizes": [20, 5, 1],
+	    "dropout_rate": 0.2
     }
   },
   "losses": [ 
