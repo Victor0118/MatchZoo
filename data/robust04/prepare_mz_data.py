@@ -45,10 +45,10 @@ def filter_triletter(tri_stats, min_filter_num=5, max_filter_num=10000):
 
 if __name__ == '__main__':
     prepare = Preparation()
-    srcdir = 'TweetCorpus/'
+    srcdir = 'Robust04Corpus/'
     dstdir = './'
     
-    infiles = [ srcdir + 'train_qrels_2011_2012_2013.txt', srcdir + 'dev_qrels_2011_2012_2013.txt', srcdir + 'test_ql_2014.txt']
+    infiles = [ srcdir + 'split1_train.txt', srcdir + 'split1_dev.txt', srcdir +'split1_test.txt']
     corpus, rel_train, rel_valid, rel_test = prepare.run_with_train_valid_test_corpus(infiles[0], infiles[1], infiles[2])
     print('total corpus : %d ...' % (len(corpus)))
     print('total relation-train : %d ...' % (len(rel_train)))
