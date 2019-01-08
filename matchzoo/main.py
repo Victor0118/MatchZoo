@@ -17,6 +17,8 @@ from collections import OrderedDict
 import keras
 import keras.backend as K
 from keras.models import Sequential, Model
+from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
+
 
 from utils import *
 import inputs
@@ -145,6 +147,9 @@ def train(config):
     non_trainable_count = int(numpy.sum([K.count_params(p) for p in set(model.non_trainable_weights)]))
     print('trainable_count: {} non_trainable_count: {}'.format(trainable_count, non_trainable_count))
 
+
+    # early_stopping = EarlyStopping(monitor='val_loss', patience=10)
+    # lr_reducer = ReduceLROnPlateau(monitor='val_loss', factor=0.3, patience=3, min_lr=0.00001)
     for i_e in range(num_iters):
         for tag, generator in train_gen.items():
             genfun = generator.get_batch_generator()
@@ -155,6 +160,7 @@ def train(config):
                     epochs = 1,
                     shuffle=False,
                     verbose = 0
+					# callbacks=[lr_reducer, early_stopping]
                 ) #callbacks=[eval_map])
             print('Iter:%d\tloss=%.6f' % (i_e, history.history['loss'][0]), end='\n')
         

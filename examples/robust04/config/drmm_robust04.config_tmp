@@ -3,10 +3,10 @@
   "global":{
       "model_type": "PY",
       "weights_file": "examples/robust04/weights/drmm.robust04.weights",
-      "save_weights_iters": 100,
-      "num_iters": 5001,
+      "save_weights_iters": 50,
+      "num_iters": 2001,
       "display_interval": 20,
-"test_weights_iters": 1300, 
+"test_weights_iters": 100, 
       "optimizer": "adam",
       "learning_rate": 0.001
   },
@@ -16,12 +16,12 @@
         "text2_corpus": "./data/robust04/corpus_preprocessed.txt",
         "use_dpool": false,
         "embed_size": 300,
-        "embed_path": "./data/robust04/embed.idf",
+        "embed_path": "./data/robust04/embed_glove_d300_norm",
         "vocab_size": 354582,
         "train_embed": false,
         "target_mode": "ranking",
-        "hist_size": 100,
-        "text1_maxlen": 6,
+        "hist_size": 20,
+        "text1_maxlen": 10,
         "text2_maxlen": 500
     },
     "train": {
@@ -32,28 +32,28 @@
         "batch_per_iter": 10,
         "batch_size": 128,
         "relation_file": "./data/robust04/relation_train.txt",
-        "hist_feats_file": "./data/robust04/relation_train.hist-100.txt"
+        "hist_feats_file": "./data/robust04/relation_train.hist-20.txt"
     },
     "valid": {
         "input_type": "DRMM_ListGenerator", 
         "phase": "EVAL",
         "batch_list": 10,
         "relation_file": "./data/robust04/relation_valid.txt",
-        "hist_feats_file": "./data/robust04/relation_valid.hist-100.txt"
+        "hist_feats_file": "./data/robust04/relation_valid.hist-20.txt"
     },
     "test": {
         "input_type": "DRMM_ListGenerator", 
         "phase": "EVAL",
         "batch_list": 10,
         "relation_file": "./data/robust04/relation_test.txt",
-        "hist_feats_file": "./data/robust04/relation_test.hist-100.txt"
+        "hist_feats_file": "./data/robust04/relation_test.hist-20.txt"
     },
     "predict": {
         "input_type": "DRMM_ListGenerator", 
         "phase": "PREDICT",
         "batch_list": 10,
         "relation_file": "./data/robust04/relation_test.txt",
-        "hist_feats_file": "./data/robust04/relation_test.hist-100.txt"
+        "hist_feats_file": "./data/robust04/relation_test.hist-20.txt"
     }
   },
   "outputs": {
@@ -67,8 +67,8 @@
     "model_py": "drmm.DRMM",
     "setting": {
         "num_layers": 3,
-        "hidden_sizes": [20, 5, 1],
-	    "dropout_rate": 0.2
+        "hidden_sizes": [30, 10, 1],
+	    "dropout_rate": 0
     }
   },
   "losses": [ 

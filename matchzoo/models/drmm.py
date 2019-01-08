@@ -48,7 +48,7 @@ class DRMM(BasicModel):
 
         q_embed = embedding(query)
         show_layer_info('Embedding', q_embed)
-        q_w = Dense(1, kernel_initializer=self.initializer_gate, use_bias=False)(q_embed)
+        q_w = Dense(1, use_bias=False)(q_embed)
         show_layer_info('Dense', q_w)
         q_w = Lambda(lambda x: softmax(x, axis=1), output_shape=(self.config['text1_maxlen'], ))(q_w)
         show_layer_info('Lambda-softmax', q_w)
@@ -56,10 +56,10 @@ class DRMM(BasicModel):
         z = Dropout(rate=self.config['dropout_rate'])(z)
         show_layer_info('Dropout', z)
         for i in range(self.config['num_layers']-1):
-            z = Dense(self.config['hidden_sizes'][i], kernel_initializer=self.initializer_fc)(z)
+            z = Dense(self.config['hidden_sizes'][i])(z)
             z = Activation('tanh')(z)
             show_layer_info('Dense', z)
-        z = Dense(self.config['hidden_sizes'][self.config['num_layers']-1], kernel_initializer=self.initializer_fc)(z)
+        z = Dense(self.config['hidden_sizes'][self.config['num_layers']-1])(z)
         show_layer_info('Dense', z)
         z = Permute((2, 1))(z)
         show_layer_info('Permute', z)

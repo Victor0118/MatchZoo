@@ -48,7 +48,7 @@ if __name__ == '__main__':
     srcdir = 'Robust04Corpus/'
     dstdir = './'
     
-    infiles = [ srcdir + 'split1_train.txt', srcdir + 'split1_dev.txt', srcdir +'split1_test.txt']
+    infiles = [ srcdir + 'split5_train_BM25_0.9_0.5.txt', srcdir + 'split5_dev_BM25_0.9_0.5_RM3_45_8_0.2.txt', srcdir +'split5_test_BM25_0.9_0.5_RM3_45_8_0.2.txt']
     corpus, rel_train, rel_valid, rel_test = prepare.run_with_train_valid_test_corpus(infiles[0], infiles[1], infiles[2])
     print('total corpus : %d ...' % (len(corpus)))
     print('total relation-train : %d ...' % (len(rel_train)))
