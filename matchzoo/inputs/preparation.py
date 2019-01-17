@@ -50,6 +50,7 @@ class Preparation(object):
         subs = line.split(delimiter)
         # print('subs: ', len(subs))
         if 3 != len(subs) and 5 != len(subs):
+            print(line, subs)
             raise ValueError('format of data file wrong, should be \'label,text1,text2\' or \'label,text1,text2,qid,docid\'.')
         else:
             return subs

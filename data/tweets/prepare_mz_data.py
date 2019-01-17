@@ -48,7 +48,7 @@ if __name__ == '__main__':
     srcdir = 'TweetCorpus/'
     dstdir = './'
     
-    infiles = [ srcdir + 'train_qrels_2011_2012_2013.txt', srcdir + 'dev_qrels_2011_2012_2013.txt', srcdir + 'test_ql_2014.txt']
+    infiles = [ srcdir + 'train_2011_2012_2013_QL+RM3.txt', srcdir + 'dev_2011_2012_2013_QL+RM3.txt', srcdir + '2014_QL+RM3.txt']
     corpus, rel_train, rel_valid, rel_test = prepare.run_with_train_valid_test_corpus(infiles[0], infiles[1], infiles[2])
     print('total corpus : %d ...' % (len(corpus)))
     print('total relation-train : %d ...' % (len(rel_train)))
