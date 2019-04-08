@@ -49,7 +49,7 @@ class Preparation(object):
     def parse_line(self, line, delimiter='\t'):
         subs = line.split(delimiter)
         # print('subs: ', len(subs))
-        if 3 != len(subs) and 5 != len(subs):
+        if 3 != len(subs) and 5 != len(subs) and 6 != len(subs) :
             print(line, subs)
             raise ValueError('format of data file wrong, should be \'label,text1,text2\' or \'label,text1,text2,qid,docid\'.')
         else:
@@ -168,6 +168,8 @@ class Preparation(object):
                 elif len(ls) == 5:
                     label, t1, t2, id1, id2 = ls
                     id2 = id2[:-1] if id2[-1] == "\n" else id2
+                elif len(ls) == 6:
+                    label, t1, t2, id1, id2, score = ls
                 else:
                     print("unrecognised file: {}".format(file_path))
                     exit()

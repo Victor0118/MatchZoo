@@ -1,6 +1,6 @@
 #!/bin/bash
 # generate the mz-datasets
-python prepare_mz_data.py
+python prepare_mz_data.py --data_path Robust04Corpus --train_file split1_train_BM25_0.9_0.5_RM3_47_9_0.3.txt --dev_file split1_dev_BM25_0.9_0.5_RM3_47_9_0.3.txt --test_file split1_test_BM25_0.9_0.5_RM3_47_9_0.3.txt
 
 # generate word embedding
 # python gen_w2v.py glove.840B.300d.txt word_dict.txt embed_glove_d300
